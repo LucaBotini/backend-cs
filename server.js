@@ -1,4 +1,5 @@
 const express = require("express");
+const serverless = require("serverless-http");
 const app = express();
 const cors = require("cors");
 app.use(cors());
@@ -65,3 +66,5 @@ app.get("/pendente", (req, res) => {
 app.listen(3000, () => {
   console.log("Servidor rodando");
 });
+
+module.exports = serverless(app);
