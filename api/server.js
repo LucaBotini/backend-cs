@@ -11,14 +11,15 @@ const client = new MercadoPagoConfig({
   accessToken:
     "APP_USR-4177697305152546-041514-471a8c487b3a64e9348acf8362404580-1225363262",
 });
+console.log(client.accessToken);
 
 const preference = new Preference(client);
 
 // Corrigir caminho estático para HTML
-app.use(express.static(path.join(__dirname, "../htmls")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../htmls", "index.html"));
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
 app.get("/preference", async (req, res) => {

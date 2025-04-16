@@ -1,15 +1,11 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/server.js",
-      "use": "@vercel/node"
-    }
-  ],
+  "builds": [{ "src": "api/server.js", "use": "@vercel/node" }],
   "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/server.js"
-    }
+    { "src": "/preference", "dest": "/api/server.js" },
+    { "src": "/sucesso", "dest": "/api/server.js" },
+    { "src": "/falha", "dest": "/api/server.js" },
+    { "src": "/pendente", "dest": "/api/server.js" },
+    { "src": "/(.*)", "dest": "/public/$1" }
   ]
 }
