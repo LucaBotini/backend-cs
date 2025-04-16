@@ -1,27 +1,25 @@
 const express = require("express");
 const serverless = require("serverless-http");
-const app = express();
 const cors = require("cors");
-app.use(cors());
 const path = require("path");
 const { MercadoPagoConfig, Preference } = require("mercadopago");
 
-// Credenciais do Mercado Pago
+const app = express();
+app.use(cors());
+
 const client = new MercadoPagoConfig({
-  accessToken:
-    "APP_USR-4177697305152546-041514-471a8c487b3a64e9348acf8362404580-1225363262",
+  accessToken: "SUA_KEY",
 });
 
 const preference = new Preference(client);
 
-// Servir arquivos HTML
-app.use(express.static(path.join(__dirname, "htmls")));
+// Corrigir caminho estático para HTML
+app.use(express.static(path.join(__dirname, "../htmls")));
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "htmls", "index.html"));
+  res.sendFile(path.join(__dirname, "../htmls", "index.html"));
 });
 
-// Rota que cria uma preference e envia o ID pro frontend
 app.get("/preference", async (req, res) => {
   try {
     const result = await preference.create({
@@ -49,9 +47,7 @@ app.get("/preference", async (req, res) => {
   }
 });
 
-// Rotas de retorno
 app.get("/sucesso", (req, res) => {
-  const { payment_id, status } = req.query;
   res.redirect("https://botinicommunity.tech/success");
 });
 
@@ -61,10 +57,6 @@ app.get("/falha", (req, res) => {
 
 app.get("/pendente", (req, res) => {
   res.redirect("https://botinicommunity.tech/loading");
-});
-
-app.listen(3000, () => {
-  console.log("Servidor rodando");
 });
 
 module.exports = serverless(app);
