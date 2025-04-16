@@ -8,7 +8,8 @@ const app = express();
 app.use(cors());
 
 const client = new MercadoPagoConfig({
-  accessToken: "SUA_KEY",
+  accessToken:
+    "APP_USR-4177697305152546-041514-471a8c487b3a64e9348acf8362404580-1225363262",
 });
 
 const preference = new Preference(client);
