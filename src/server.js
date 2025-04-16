@@ -1,5 +1,4 @@
 const express = require("express");
-const serverless = require("serverless-http");
 const cors = require("cors");
 const path = require("path");
 const { MercadoPagoConfig, Preference } = require("mercadopago");
@@ -61,4 +60,6 @@ app.get("/pendente", (req, res) => {
   res.redirect("https://botinicommunity.tech/loading");
 });
 
-module.exports = serverless(app);
+app.listen(3000, () => {
+  console.log("Servidor rodando em http://localhost:3000/");
+});
